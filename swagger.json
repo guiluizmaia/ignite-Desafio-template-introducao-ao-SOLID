@@ -1,0 +1,156 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Desafio Ignite Documentation",
+        "desciption": "Desafio extra",
+        "version": "1.0.0",
+        "contact": {
+            "email": "teste@teste.com.br"
+        }
+    },
+    "paths": {
+        "/users": {
+            "post": {
+                "tags": ["User"],
+                "summary": "Create a user",
+                "description": "Create a new user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "Name user example",
+                                    "email": "teste@teste.com"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "500": {
+                        "description": "Category already exists"
+                    }
+
+                }
+            },
+            "get": {
+                "tags": ["User"],
+                "summary": "List all users",
+                "description": "List all users",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }                
+        },
+        "/users/{user_id}":{
+            "get": {
+                "tags": ["User"],
+                "summary": "Find user by ID",
+                "description": "Returns a single user",
+                "produces": "application/json",
+                "parameters": [{
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "ID of User to return",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "responses": {
+                    "200":{
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            }
+                                        }                                    
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Error"
+                    }
+
+                }
+            }
+        },
+        "/users/{user_id}/admin":{
+            "patch": {
+                "tags": ["User"],
+                "summary": "Transform User in admin",
+                "description": "Transform User in admin",
+                "parameters": [{
+                    "name": "user_id",
+                    "description": "ID of User to return",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200":{
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            }
+                                        }                                    
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Error"
+                    }
+
+                }
+            }
+        }
+    }
+}
